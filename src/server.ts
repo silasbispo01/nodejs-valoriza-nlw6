@@ -1,16 +1,24 @@
 import express from 'express';
+import "reflect-metadata";
+import "./database"
+import { router } from './routes';
 
 const app = express();
+
+app.use(express.json())
+app.use(router);
+
+app.listen(3000, () => console.log('Server is running...'))
+
+
 
 // yarn add typescript -D
 // yarn tsc --init 
 // yarn add express
 // yarn add @types/express
 // yarn add ts-node-dev -D
+// yarn add typeorm reflect-metadata sqlite3
 //http://localhost:3000
-
-app.listen(3000, () => console.log('Server is running...'))
-
 
 /*
 GET => Buscar informações...
@@ -18,14 +26,19 @@ POST => Inserir uma informação...
 PUT => Alterar informações...
 DELETE => Deletar informações...
 PATCH => Alterar informações especificas... ex: senha
+
+==============
+
+Tipos de parâmetros
+
+Routes Params => http://lh3000/produtos/:id
+
+Query Params => http://lh3000/produtos?name=teclado&description=tecladobom
+
+Body Params => {
+    POST, PUT, PATCH = {
+        "name": "teclado",
+        "description": "teclado bom"
+    }
+}
 */
-app.get('/home', (req, res) => {
-    //req => entra
-    //res => sai
-
-    res.send('Olá nlw')
-})
-
-app.post('/home-post', (req, res) => {
-    res.send('Olá nlw - POST')
-})
